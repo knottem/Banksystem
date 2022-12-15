@@ -1,0 +1,4 @@
+Frida Lindberg/123/10000
+Samuel Peterson/222/80
+Erik Wallenius/321/3000
+Sixten Lönnberg/111/400
