@@ -21,27 +21,35 @@ public class Window {
         JLabel loginLabel = new JLabel("Login");
         loginLabel.setBounds(this.size / 3, this.size, this.size, 30);
         this.frame.add(loginLabel);
+
         JLabel passwordLabel = new JLabel("Password");
         passwordLabel.setBounds(this.size / 3, this.size * 2, this.size, 30);
         this.frame.add(passwordLabel);
+
         JTextField userName = new JTextField();
         userName.setBounds(this.size * 2, this.size, this.size * 3, 30);
         this.frame.add(userName);
+
         JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(this.size * 2, this.size * 2, this.size * 3, 30);
         this.frame.add(passwordField);
+
         JButton loginButton = new JButton("Login");
         loginButton.setBounds(this.size * 2, this.size * 3, 100, this.size / 2);
         this.frame.add(loginButton);
+
         JButton cancelButton = new JButton("Avbryt");
         cancelButton.setBounds(this.size * 4, this.size * 3, 100, this.size / 2);
         this.frame.add(cancelButton);
+
         JButton createButton = new JButton("Skapa ny Användare");
         createButton.setBounds(this.size * 2, this.size * 4, this.size * 3, this.size / 2);
         this.frame.add(createButton);
+
         JButton faqButton = new JButton("FAQ");
         faqButton.setBounds(this.size * 2, this.size * 6, this.size * 3, this.size / 2);
         this.frame.add(faqButton);
+
         this.frame.revalidate();
         this.frame.repaint();
     }
