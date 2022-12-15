@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Database {
 
-    ArrayList<Customer> customers;
-    ArrayList<Admin> admins;
+    ArrayList<User> customers;
+    ArrayList<User> admins;
 
     public Database() {
         this.customers = new ArrayList<>();
@@ -21,7 +21,7 @@ public class Database {
                 String name = array[0];
                 String password = array[1];
                 double balance = Double.parseDouble(array[2]);
-                customers.add(new Customer(name, password, balance));
+                customers.add(UserFactory.getUser(UserType.CUSTOMER,name, password, balance));
             }
             System.out.println(customers.get(0).getName());
 

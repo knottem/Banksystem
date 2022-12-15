@@ -5,6 +5,6 @@ public class Main {
         Window window = new Window();
         window.setupLogin();
         window.setupLoginPage();
-        User user1 = UserFactory.getUser(UserType.CUSTOMER);
+
     }
 }

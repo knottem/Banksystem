@@ -1,12 +1,16 @@
+import javax.swing.*;
+
 public class UserFactory {
-    public static User getUser(UserType userType) {
+    public static User getUser(UserType userType, String name, String password, double balance) {
         switch (userType) {
             case CUSTOMER:
-                return new Customer();
+                return new Customer(name, password, balance);
             case ADMIN:
-                return new Admin();
+                return new Admin(name, password);
             default:
                 return null;
         }
     }
+
+
 }
