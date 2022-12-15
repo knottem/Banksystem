@@ -1,12 +1,7 @@
 package Client;
 
-import java.awt.Component;
-import java.awt.LayoutManager;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import java.awt.*;
+import javax.swing.*;
 
 public class Window {
 
@@ -18,49 +13,82 @@ public class Window {
     }
 
     public void setupLogin() {
+
+        frame.getContentPane().removeAll();
+
         JLabel loginLabel = new JLabel("Login");
-        loginLabel.setBounds(this.size / 3, this.size, this.size, 30);
-        this.frame.add(loginLabel);
+        loginLabel.setBounds(size / 3, size, size, 30);
+        frame.add(loginLabel);
 
         JLabel passwordLabel = new JLabel("Password");
-        passwordLabel.setBounds(this.size / 3, this.size * 2, this.size, 30);
-        this.frame.add(passwordLabel);
+        passwordLabel.setBounds(size / 3, size * 2, size, 30);
+        frame.add(passwordLabel);
 
         JTextField userName = new JTextField();
-        userName.setBounds(this.size * 2, this.size, this.size * 3, 30);
-        this.frame.add(userName);
+        userName.setBounds(size * 2, size, size * 3, 30);
+        frame.add(userName);
 
         JPasswordField passwordField = new JPasswordField();
-        passwordField.setBounds(this.size * 2, this.size * 2, this.size * 3, 30);
-        this.frame.add(passwordField);
+        passwordField.setBounds(size * 2, size * 2, size * 3, 30);
+        frame.add(passwordField);
 
         JButton loginButton = new JButton("Login");
-        loginButton.setBounds(this.size * 2, this.size * 3, 100, this.size / 2);
-        this.frame.add(loginButton);
+        loginButton.setBounds(size * 2, size * 3, 100, size / 2);
+        frame.add(loginButton);
 
         JButton cancelButton = new JButton("Avbryt");
-        cancelButton.setBounds(this.size * 4, this.size * 3, 100, this.size / 2);
-        this.frame.add(cancelButton);
+        cancelButton.setBounds(size * 4, size * 3, 100, size / 2);
+        frame.add(cancelButton);
 
         JButton createButton = new JButton("Skapa ny Användare");
-        createButton.setBounds(this.size * 2, this.size * 4, this.size * 3, this.size / 2);
-        this.frame.add(createButton);
+        createButton.setBounds(size * 2,size * 4, size * 3, size / 2);
+        frame.add(createButton);
 
         JButton faqButton = new JButton("FAQ");
-        faqButton.setBounds(this.size * 2, this.size * 6, this.size * 3, this.size / 2);
-        this.frame.add(faqButton);
+        faqButton.setBounds(size * 2, size * 6, size * 3, size / 2);
+        frame.add(faqButton);
 
-        this.frame.revalidate();
-        this.frame.repaint();
+        frame.revalidate();
+        frame.repaint();
+    }
+
+    public void setupLoginPage(){
+
+        frame.getContentPane().removeAll();
+
+        JLabel transferLabel = new JLabel("Belopp");
+        transferLabel.setBounds(size, size, size*2, 30);
+        frame.add(transferLabel);
+
+        JLabel transferKonto = new JLabel("Konto nr:");
+        transferKonto.setBounds(size, size/2, size*2, 30);
+        frame.add(transferKonto);
+
+        JTextField transferAccount = new JTextField();
+        transferAccount.setBounds(size*2, size/2, size*3, 30);
+        frame.add(transferAccount);
+
+        JTextField transferText = new JTextField();
+        transferText.setBounds(size*2, size, size*3, 30);
+        frame.add(transferText);
+
+        JButton transferButton = new JButton("Skicka Överföring");
+        transferButton.setBounds(size*6, (int) (size/1.5), (int) (size*2.3), 30);
+        frame.add(transferButton);
+
+
+        frame.revalidate();
+        frame.repaint();
+
     }
 
     private void setupBase() {
-        this.frame = new JFrame("BankSystem");
-        this.frame.setLayout((LayoutManager)null);
-        this.frame.setSize(this.size * 8, this.size * 8);
-        this.frame.setVisible(true);
-        this.frame.setDefaultCloseOperation(3);
-        this.frame.setResizable(false);
-        this.frame.setLocationRelativeTo((Component)null);
+        frame = new JFrame("Bank System");
+        frame.setLayout(null);
+        frame.setSize(size * 9, size * 8);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(3);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
     }
 }
