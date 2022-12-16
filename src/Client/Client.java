@@ -70,12 +70,13 @@ public class Client {
         boolean startLoop = true;
         do {
             int answer = utility.inputInt("Välkommen " + customer.getName() +
-                    "\n1. Överföra pengar\n2. Sätta in pengar\n3. Kolla Kontot\n4. Logga ut");
+                    "\n1. Överföra pengar\n2. Sätta in pengar\n3. Ta ut pengar\n4. Kolla Kontot\n5. Logga ut");
                 switch (answer) {
                     //case (1) -> utility.transfer(customer, database.getCustomers());
                     case (2) -> utility.deposit(customer);
-                    case (3) -> utility.checkAccount(customer);
-                    case (4) -> startLoop = false;
+                    case (3) -> utility.withdraw(customer);
+                    case (4) -> utility.checkAccount(customer);
+                    case (5) -> startLoop = false;
                     default -> System.out.println("Felaktigt nummer");
                 }
             }while(startLoop);

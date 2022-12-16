@@ -90,4 +90,12 @@ public class Utility {
         System.out.println("\n" + customer.getName() + "\nAccount balance:\n" + customer.getBalance()  + " kr\n");
         sleep(2000);
     }
+
+    public void withdraw(Customer customer) {
+        int value = inputInt("Hur mycket vill du ta ut?");
+        customer.withdrawMoney(value);
+        System.out.println(value + " kr togs ut från kontot\n");
+        history.writeToFile("Withdraw " + value + " kr", customer);
+        sleep(2000);
+    }
 }
