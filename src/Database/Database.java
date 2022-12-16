@@ -5,16 +5,25 @@ import Users.*;
 import java.io.*;
 import java.util.ArrayList;
 
+//Använder singleton
 public class Database {
-
+    private static Database instance;
     ArrayList<Customer> customers;
     ArrayList<Admin> admins;
 
-    public Database() {
+    private Database() {
         this.customers = new ArrayList<>();
         this.admins = new ArrayList<>();
         addCustomersToDatabase();
         addAdminsToDatabase();
+    }
+
+    //Databasen skapas om den inte redan finns, annars returneras den som redan finns
+    public static Database getDatabase() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
     }
 
     //läser från customers.txt och skapar en kund och lägger till i listan
