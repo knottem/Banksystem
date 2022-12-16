@@ -44,7 +44,7 @@ public class Window {
         createButton.setBounds(size * 2,size * 4, size * 3, size / 2);
         frame.add(createButton);
 
-        JButton faqButton = new JButton("FAQ");
+        JButton faqButton = new JButton("Client.FAQ");
         faqButton.setBounds(size * 2, size * 6, size * 3, size / 2);
         frame.add(faqButton);
 
