@@ -8,7 +8,7 @@ public class Client {
 
     LocalDate today = LocalDate.now();
     Utility utility = new Utility();
-    //FAQ faq = new FAQ();
+    FAQ faq = new FAQ();
     boolean repeat = false;
 
     void Program() {
@@ -31,7 +31,7 @@ public class Client {
                     case (2) -> {
                     }
                     case (3) -> {
-                      //  faq.print();
+                        faq.print();
                         utility.sleep(1000);
                         startLoop = false;
                     }
