@@ -32,7 +32,7 @@ public class Client {
                     case (3) -> {
                         faq.readingFAQ();
                         utility.sleep(1000);
-                        startLoop = false;3
+                        startLoop = false;
                     }
                     case (4) -> System.exit(0);
 

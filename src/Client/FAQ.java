@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FAQ {
-    Path faq = Paths.get("src/FrequentlyAskedQuestions.txt");
+    Path faq = Paths.get("resources/FrequentlyAskedQuestions.txt");
     public void readingFAQ() {
 
         String line = null;
