@@ -14,7 +14,7 @@ public class Client {
     FAQ faq = new FAQ();
     boolean repeat = false;
 
-    Database database = new Database();
+    Database database = Database.getDatabase();
 
     void Program() {
 
