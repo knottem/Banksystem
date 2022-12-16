@@ -1,11 +1,12 @@
+package Client;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
 
-public class ReadFAQ {
+public class FAQ {
     Path faq = Paths.get("src/FrequentlyAskedQuestions.txt");
     public void readingFAQ() {
 

@@ -3,7 +3,6 @@ package Client;
 import utility.Utility;
 
 import java.time.LocalDate;
-
 public class Client {
 
     LocalDate today = LocalDate.now();
@@ -31,9 +30,9 @@ public class Client {
                     case (2) -> {
                     }
                     case (3) -> {
-                        faq.print();
+                        faq.readingFAQ();
                         utility.sleep(1000);
-                        startLoop = false;
+                        startLoop = false;3
                     }
                     case (4) -> System.exit(0);
 
