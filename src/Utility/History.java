@@ -1,3 +1,5 @@
+package Utility;
+
 import Users.User;
 
 import java.io.*;
@@ -10,7 +12,10 @@ public class History {
     public void writeToFile(String text, User user) {
         try(BufferedWriter print = new BufferedWriter(new FileWriter(file, true))){
 
-            String textForHistoryTextFile = "User: "+ user.getName() + ". Activity: " + text + ". Time: " + LocalTime.now();
+            String textForHistoryTextFile = "User: "+ user.getName() + ".\n" +
+                    "Activity: " + text + ".\n" +
+                    "Time: " + LocalTime.now().withNano(0) + ".\n" +
+                    "Date: " + LocalDate.now() + "\n\n";
             print.write(textForHistoryTextFile);
 
         }catch (Exception e){
