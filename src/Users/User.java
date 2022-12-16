@@ -1,6 +1,6 @@
 package Users;
 
-public abstract class User {
+public class User {
 
     private String name;
     private String password;
@@ -28,4 +28,5 @@ public abstract class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

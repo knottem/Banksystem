@@ -6,7 +6,7 @@ public class UserFactory {
             case CUSTOMER:
                 return new Customer(name, password, balance);
             case ADMIN:
-                return new Admin(name, password);
+                return new Admin(name, password, balance);
             default:
                 return null;
         }
