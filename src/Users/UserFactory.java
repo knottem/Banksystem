@@ -1,4 +1,4 @@
-import javax.swing.*;
+package Users;
 
 public class UserFactory {
     public static User getUser(UserType userType, String name, String password, double balance) {

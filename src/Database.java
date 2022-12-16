@@ -1,3 +1,7 @@
+import Users.User;
+import Users.UserFactory;
+import Users.UserType;
+
 import java.io.*;
 import java.util.ArrayList;
 
