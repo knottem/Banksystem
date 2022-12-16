@@ -57,25 +57,30 @@ public class Utility {
 //        boolean found = false;
 //        Scanner scan = new Scanner(System.in);
 //        int value = inputInt("Hur mycket vill du överföra?");
-//        int account = inputInt("Till vilket konto?");
-//        for (int i = 0; i < customers.size(); i++) {
-//            if(customers.get(i).getAccount() == account){
-//                found = true;
-//                while(true) {
-//                    System.out.println("Stämmer detta konto: " + account + " Svara med J för ja eller N för nej");
-//                    String answer = scan.nextLine();
-//                    if (answer.equalsIgnoreCase("j")) {
-//                        //Måste lägga till att kolla så det inte blir minus tal efter man withdrawar
-//                        customer.withdrawMoney(value);
-//                        customers.get(i).depositMoney(value);
-//                        break;
+//        if(customer.getBalance() - value >= 0) {
+//            int account = inputInt("Till vilket konto?");
+//            for (int i = 0; i < customers.size(); i++) {
+//                if (customers.get(i).getAccount() == account) {
+//                    found = true;
+//                    while (true) {
+//                        System.out.println("Stämmer detta konto: " + account + " Svara med J för ja eller N för nej");
+//                        String answer = scan.nextLine();
+//                        if (answer.equalsIgnoreCase("j")) {
+//                            //Måste lägga till att kolla så det inte blir minus tal efter man withdrawar
+//                            customer.withdrawMoney(value);
+//                            customers.get(i).depositMoney(value);
+//                            break;
+//                        }
 //                    }
 //                }
 //            }
+//            if(!found){
+//                System.out.println("felaktigt konto");
+//            }
+//        } else {
+//            System.out.println("Du har för lite pengar på kontot");
 //        }
-//        if(!found){
-//            System.out.println("felaktigt konto");
-//        }
+//
 //    }
 
     public void deposit(Customer customer) {
@@ -93,9 +98,13 @@ public class Utility {
 
     public void withdraw(Customer customer) {
         int value = inputInt("Hur mycket vill du ta ut?");
-        customer.withdrawMoney(value);
-        System.out.println(value + " kr togs ut från kontot\n");
-        history.writeToFile("Withdraw " + value + " kr", customer);
+        if(customer.getBalance() - value >= 0) {
+            customer.withdrawMoney(value);
+            System.out.println(value + " kr togs ut från kontot\n");
+            history.writeToFile("Withdraw " + value + " kr", customer);
+        } else {
+            System.out.println("Du har för lite pengar på kontot");
+        }
         sleep(2000);
     }
 }
