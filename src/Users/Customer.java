@@ -20,10 +20,10 @@ public class Customer extends User{
     }
 
     public void withdrawMoney(double amount) {
-
+        balance -= amount;
     }
     public void depositMoney (double amount) {
-
+        balance += amount;
     }
     public void transferToAccount (double amount, int fromAccount, int toAccount) {
 
