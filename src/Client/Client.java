@@ -1,14 +1,20 @@
 package Client;
 
+import Database.Database;
+import Users.Customer;
 import utility.Utility;
 
 import java.time.LocalDate;
+import java.util.Scanner;
+
 public class Client {
 
     LocalDate today = LocalDate.now();
     Utility utility = new Utility();
     FAQ faq = new FAQ();
     boolean repeat = false;
+
+    Database database = new Database();
 
     void Program() {
 
@@ -26,6 +32,23 @@ public class Client {
                         4. Avsluta Programmet""");
                 switch (answer) {
                     case (1) -> {
+                        System.out.println("\nSkriv in användarnamn:");
+                        Scanner scan = new Scanner(System.in);
+                        String name = scan.nextLine();
+                        boolean found = false;
+                        for (int i = 0; i < database.getCustomers().size() ; i++) {
+                            if(name.equalsIgnoreCase(database.getCustomers().get(i).getName())){
+                                System.out.println("Skriv in lösenord:");
+                                String password = scan.nextLine();
+                                found = true;
+                                if(password.equals(database.getCustomers().get(i).getPassword())){
+                                    login(database.getCustomers().get(i));
+                                }
+                            }
+                        }
+                        if(!found){
+                            System.out.println("Användaren hittades inte\n");
+                        }
                     }
                     case (2) -> {
                     }
@@ -41,6 +64,23 @@ public class Client {
             }
             repeat = utility.repeatProgram("\nKör igen?");
         }while (!repeat);
+    }
+
+    private void login (Customer customer){
+        boolean startLoop = true;
+        do {
+            int answer = utility.inputInt("Välkommen " + customer.getName() +
+                    "\n1. Överföra pengar\n2. Sätta in pengar\n3.\n4. Logga ut");
+                switch (answer) {
+                    case (1) -> utility.transfer(customer, database.getCustomers());
+                    case (2) -> {
+                    }
+                    case (3) -> {
+                    }
+                    case (4) -> startLoop = false;
+                    default -> System.out.println("Felaktigt nummer");
+                }
+            }while(startLoop);
     }
 
     public static void main(String[] args) {

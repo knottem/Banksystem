@@ -1,3 +1,5 @@
+package Database;
+
 import Users.*;
 
 import java.io.*;
@@ -27,11 +29,6 @@ public class Database {
                 double balance = Double.parseDouble(array[2]);
                 customers.add((Customer) UserFactory.getUser(UserType.CUSTOMER,name, password, balance));
             }
-            System.out.println(customers.get(0).getName());
-            System.out.println(customers.get(1).getPassword());
-            System.out.println(customers.get(0).getBalance());
-
-
         } catch (FileNotFoundException e) {
             System.out.println("file not found");
             e.printStackTrace();
@@ -54,7 +51,6 @@ public class Database {
                 double balance = Double.parseDouble(array[2]); //admin har 0 som balance, ska försöka ändra detta
                 admins.add((Admin) UserFactory.getUser(UserType.ADMIN,name, password, balance));
             }
-            System.out.println(admins.get(0).getName());
         } catch (FileNotFoundException e) {
             System.out.println("file not found");
             e.printStackTrace();
@@ -64,4 +60,12 @@ public class Database {
         }
 
     }
+
+    public ArrayList<Customer> getCustomers() {
+        return customers;
     }
+
+    public ArrayList<Admin> getAdmins() {
+        return admins;
+    }
+}

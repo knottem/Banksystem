@@ -1,5 +1,8 @@
 package utility;
 
+import Users.Customer;
+
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -45,6 +48,31 @@ public class Utility {
             Thread.sleep(number);
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void transfer(Customer customer, ArrayList<Customer> customers){
+        boolean found = false;
+        Scanner scan = new Scanner(System.in);
+        int value = inputInt("Hur mycket vill du överföra?");
+        System.out.println("Till vem?");
+        int account = inputInt("Till vilket konto?");
+        for (int i = 0; i < customers.size(); i++) {
+            if(customers.get(i).getAccount() == account){
+                found = true;
+                System.out.println("Stämmer detta konto: " + account + " Svara med J för ja eller N för nej");
+                String answer = scan.nextLine();
+                switch(answer){
+                    case "j" -> {
+                        //Måste lägga till att kolla så det inte blir minus tal efter man withdrawar
+                        customer.withdrawMoney(value);
+                        customers.get(i).depositMoney(value);
+                    }
+                }
+            }
+        }
+        if(!found){
+            System.out.println("felaktigt konto");
         }
     }
 
