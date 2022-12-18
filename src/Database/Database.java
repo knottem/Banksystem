@@ -35,8 +35,14 @@ public class Database {
                 String[] array = line.split("/");
                 String name = array[0];
                 String password = array[1];
-                double balance = Double.parseDouble(array[2]);
-                customers.add((Customer) UserFactory.getUser(UserType.CUSTOMER,name, password, balance));
+                ArrayList<Account> account = new ArrayList<>();
+                for (int i = 2; i < array.length; i+=2) {
+                    Account temp = new Account();
+                    temp.setId(Integer.parseInt(array[i]));
+                    temp.setBalance(Double.parseDouble(array[i+1]));
+                    account.add(temp);
+                }
+                customers.add((Customer) UserFactory.getUser(UserType.CUSTOMER,name, password, account));
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found");
@@ -58,7 +64,8 @@ public class Database {
                 String name = array[0];
                 String password = array[1];
                 double balance = Double.parseDouble(array[2]); //admin har 0 som balance, ska försöka ändra detta
-                admins.add((Admin) UserFactory.getUser(UserType.ADMIN,name, password, balance));
+                ArrayList<Account> account2 = new ArrayList<>();
+                admins.add((Admin) UserFactory.getUser(UserType.ADMIN,name, password, account2));
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found");

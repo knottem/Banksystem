@@ -92,16 +92,30 @@ public class Utility {
     }
 
     public void checkAccount(Customer customer) {
-        System.out.println("\n" + customer.getName() + "\nAccount balance:\n" + customer.getBalance()  + " kr\n");
+        StringBuilder accounts = new StringBuilder();
+        for (int i = 0; i < customer.getAccount().size() ; i++) {
+            accounts.append("Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr\n");
+        }
+        if(accounts.isEmpty()){
+            System.out.println("\n" + customer.getName() + "\n");
+        } else{
+            System.out.println("\n" + customer.getName() + "\n" + accounts);
+        }
+
         sleep(2000);
     }
 
     public void withdraw(Customer customer) {
         int value = inputInt("Hur mycket vill du ta ut?");
-        if(customer.getBalance() - value >= 0) {
-            customer.withdrawMoney(value);
+        System.out.println("Från vilket konto?");
+        for (int i = 0; i <customer.getAccount().size() ; i++) {
+            System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
+        }
+        int konto = inputInt("Svara med siffran som stämmer överens med Kontot");
+        if(customer.getAccount().get(konto-1).getBalance() - value >= 0) {
+            customer.getAccount().get(konto-1).withdrawMoney(value);
             System.out.println(value + " kr togs ut från kontot\n");
-            history.writeToFile("Withdraw " + value + " kr", customer);
+            history.writeToFile("Withdraw " + value + " kr from Account " + customer.getAccount().get(konto-1).getId(), customer);
         } else {
             System.out.println("Du har för lite pengar på kontot");
         }

@@ -1,14 +1,18 @@
 package Users;
 
+import java.util.ArrayList;
+
 public class Customer extends User{
+
     double balance;
+    ArrayList<Account> account;
 
     public Customer() {
     }
 
-    public Customer(String name, String password, double balance) {
+    public Customer(String name, String password, ArrayList<Account> account) {
         super(name, password);
-        this.balance = balance;
+        this.account = account;
     }
 
     public double getBalance() {
@@ -25,6 +29,15 @@ public class Customer extends User{
     public void depositMoney (double amount) {
         balance += amount;
     }
+
+    public ArrayList<Account> getAccount() {
+        return account;
+    }
+
+    public void setAccount(ArrayList<Account> account) {
+        this.account = account;
+    }
+
     public void transferToAccount (double amount, int fromAccount, int toAccount) {
 
     }
