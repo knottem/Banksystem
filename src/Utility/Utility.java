@@ -129,15 +129,16 @@ public class Utility {
 
     public int createRandomNumber(ArrayList<Customer> customers){
         int number = 0;
-        boolean checkIfNumberExists = false;
+        boolean checkIfNumberExists;
         do {
+            checkIfNumberExists = false;
             for (int i = 0; i < 6; i++) {
                 number += random.nextInt(9) + 1;
-                number = number * 10;
+                number *= 10;
             }
-            for (int i = 0; i < customers.size() ; i++) {
-                for (int j = 0; j < customers.get(i).getAccount().size(); j++) {
-                    if (customers.get(i).getAccount().get(j).getId() == number) {
+            for (Customer customer : customers) {
+                for (int j = 0; j < customer.getAccount().size(); j++) {
+                    if (customer.getAccount().get(j).getId() == number) {
                         checkIfNumberExists = true;
                     }
                 }
