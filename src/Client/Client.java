@@ -12,7 +12,6 @@ public class Client {
     LocalDate today = LocalDate.now();
     Utility utility = new Utility();
     FAQ faq = new FAQ();
-    boolean repeat = false;
 
     Database database = Database.getDatabase();
 
@@ -20,50 +19,55 @@ public class Client {
 
         System.out.println("\nVälkommen till Bank Systemet");
         System.out.println("Dagens Datum: " + today + "\n");
-
-        do {
-            boolean startLoop = true;
-            while (startLoop) {
-                int answer = utility.inputInt("""
-                        Vad vill du göra?
-                        1. Logga in
-                        2. Skapa ny användare
-                        3. FAQ
-                        4. Avsluta Programmet""");
-                switch (answer) {
-                    case (1) -> {
-                        System.out.println("\nSkriv in användarnamn:");
-                        Scanner scan = new Scanner(System.in);
-                        String name = scan.nextLine();
-                        boolean found = false;
-                        for (int i = 0; i < database.getCustomers().size() ; i++) {
-                            if(name.equalsIgnoreCase(database.getCustomers().get(i).getName())){
-                                System.out.println("Skriv in lösenord:");
-                                String password = scan.nextLine();
-                                found = true;
-                                if(password.equals(database.getCustomers().get(i).getPassword())){
-                                    login(database.getCustomers().get(i));
-                                }
+        while (true) {
+            int answer = utility.inputInt("""
+                    Vad vill du göra?
+                    1. Logga in
+                    2. Skapa ny användare
+                    3. FAQ
+                    4. Avsluta Programmet""");
+            switch (answer) {
+                case (1) -> {
+                    System.out.println("\nSkriv in användarnamn:");
+                    Scanner scan = new Scanner(System.in);
+                    String name = scan.nextLine();
+                    boolean found = false;
+                    for (int i = 0; i < database.getCustomers().size(); i++) {
+                        if (name.equalsIgnoreCase(database.getCustomers().get(i).getName())) {
+                            System.out.println("Skriv in lösenord:");
+                            String password = scan.nextLine();
+                            found = true;
+                            if (password.equals(database.getCustomers().get(i).getPassword())) {
+                                login(database.getCustomers().get(i));
+                                break;
                             }
                         }
-                        if(!found){
-                            System.out.println("Användaren hittades inte\n");
+                    }
+                    for (int i = 0; i < database.getAdmins().size(); i++) {
+                        if (name.equalsIgnoreCase(database.getAdmins().get(i).getName())) {
+                            System.out.println("Skriv in lösenord:");
+                            String password = scan.nextLine();
+                            found = true;
+                            if (password.equals(database.getAdmins().get(i).getPassword())) {
+                                //  loginAdmin(database.getAdmins().get(i));
+                                break;
+                            }
                         }
                     }
-                    case (2) -> {
+                    if (!found) {
+                        System.out.println("Användaren hittades inte\n");
                     }
-                    case (3) -> {
-                        faq.readingFAQ();
-                        utility.sleep(1000);
-                        startLoop = false;
-                    }
-                    case (4) -> System.exit(0);
-
-                    default -> System.out.println("Felaktigt nummer");
                 }
+                case (2) -> {
+                }
+                case (3) -> {
+                    faq.readingFAQ();
+                    utility.sleep(1000);
+                }
+                case (4) -> System.exit(0);
+                default -> System.out.println("Felaktigt nummer");
             }
-            repeat = utility.repeatProgram("\nKör igen?");
-        }while (!repeat);
+        }
     }
 
     private void login (Customer customer){
