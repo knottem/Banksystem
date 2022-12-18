@@ -2,12 +2,15 @@ package Utility;
 
 import Users.Customer;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Utility {
 
     History history = new History();
+    Random random = new Random();
 
     public int inputInt(String text) {
         while (true) {
@@ -122,5 +125,24 @@ public class Utility {
             System.out.println("Du har för lite pengar på kontot");
         }
         sleep(2000);
+    }
+
+    public int createRandomNumber(ArrayList<Customer> customers){
+        int number = 0;
+        boolean checkIfNumberExists = false;
+        do {
+            for (int i = 0; i < 6; i++) {
+                number += random.nextInt(9) + 1;
+                number = number * 10;
+            }
+            for (int i = 0; i < customers.size() ; i++) {
+                for (int j = 0; j < customers.get(i).getAccount().size(); j++) {
+                    if (customers.get(i).getAccount().get(j).getId() == number) {
+                        checkIfNumberExists = true;
+                    }
+                }
+            }
+        } while (checkIfNumberExists);
+        return number;
     }
 }

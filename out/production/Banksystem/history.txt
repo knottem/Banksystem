@@ -13,3 +13,8 @@ Activity: Deposit 100 kr.
 Time: 15:08:33.
 Date: 2022-12-16
 
+User: Erik Wallenius.
+Activity: Withdraw 1000 kr from Account 3000.
+Time: 06:00:33.
+Date: 2022-12-18
+
