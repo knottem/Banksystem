@@ -27,7 +27,7 @@ public class Client {
                 int answer = utility.inputInt("""
                         Vad vill du göra?
                         1. Logga in
-                        2. Skapa Nytt Konto
+                        2. Skapa ny användare
                         3. FAQ
                         4. Avsluta Programmet""");
                 switch (answer) {
@@ -70,7 +70,7 @@ public class Client {
         boolean startLoop = true;
         do {
             int answer = utility.inputInt("Välkommen " + customer.getName() +
-                    "\n1. Överföra pengar\n2. Sätta in pengar\n3. Ta ut pengar\n4. Kolla Kontot\n5. Logga ut");
+                    "\n1. Överföra pengar\n2. Sätta in pengar\n3. Ta ut pengar\n4. Kolla dina konton\n5. Logga ut");
                 switch (answer) {
                     //case (1) -> utility.transfer(customer, database.getCustomers());
                     case (2) -> utility.deposit(customer);

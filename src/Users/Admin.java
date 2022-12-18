@@ -1,7 +1,7 @@
 package Users;
 
 public class Admin extends User{
-    public Admin(String name, String password, double balance) {
+    public Admin(String name, String password) {
         super(name, password);
     }
 }
