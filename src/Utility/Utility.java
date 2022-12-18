@@ -2,8 +2,6 @@ package Utility;
 
 import Users.Customer;
 
-import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -85,9 +83,14 @@ public class Utility {
 
     public void deposit(Customer customer) {
         int value = inputInt("Hur mycket vill du lägga in?");
-        customer.depositMoney(value);
-        System.out.println(value + " kr sattes in på kontot\n");
-        history.writeToFile("Deposit " + value + " kr", customer);
+        System.out.println("Till vilket konto?");
+        for (int i = 0; i <customer.getAccount().size() ; i++) {
+            System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
+        }
+        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") + 1;
+        customer.getAccount().get(konto).depositMoney(value);
+        System.out.println(value + " kr sattes in på kontot " + customer.getAccount().get(konto) + "\n");
+        history.writeToFile("Deposit " + value + " kr to Account " + customer.getAccount().get(konto).getId(), customer);
         sleep(2000);
     }
 
@@ -98,10 +101,9 @@ public class Utility {
         }
         if(accounts.isEmpty()){
             System.out.println("\n" + customer.getName() + "\n");
-        } else{
+        } else {
             System.out.println("\n" + customer.getName() + "\n" + accounts);
         }
-
         sleep(2000);
     }
 
@@ -111,11 +113,11 @@ public class Utility {
         for (int i = 0; i <customer.getAccount().size() ; i++) {
             System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
         }
-        int konto = inputInt("Svara med siffran som stämmer överens med Kontot");
-        if(customer.getAccount().get(konto-1).getBalance() - value >= 0) {
-            customer.getAccount().get(konto-1).withdrawMoney(value);
+        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") + 1;
+        if(customer.getAccount().get(konto).getBalance() - value >= 0) {
+            customer.getAccount().get(konto).withdrawMoney(value);
             System.out.println(value + " kr togs ut från kontot\n");
-            history.writeToFile("Withdraw " + value + " kr from Account " + customer.getAccount().get(konto-1).getId(), customer);
+            history.writeToFile("Withdraw " + value + " kr from Account " + customer.getAccount().get(konto).getId(), customer);
         } else {
             System.out.println("Du har för lite pengar på kontot");
         }
