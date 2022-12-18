@@ -3,7 +3,6 @@ package Utility;
 import Database.Database;
 import Users.Customer;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -12,6 +11,8 @@ public class Utility {
 
     History history = new History();
     Random random = new Random();
+
+    Database database = Database.getDatabase();
 
     public int inputInt(String text) {
         while (true) {
@@ -131,13 +132,12 @@ public class Utility {
     public int createRandomNumber(){
         int number;
         boolean checkIfNumberExists;
-        ArrayList<Customer> customers = Database.getDatabase().getCustomers();
         do {
             checkIfNumberExists = false;
             number = random.nextInt(999999) + 100000;
-            for (int i = 0; i < customers.size(); i++) {
-                for (int j = 0; j < customers.get(i).getAccount().size(); j++) {
-                    if (customers.get(i).getAccount().get(j).getId() == number) {
+            for (int i = 0; i < database.getCustomers().size(); i++) {
+                for (int j = 0; j < database.getCustomers().get(i).getAccount().size(); j++) {
+                    if (database.getCustomers().get(i).getAccount().get(j).getId() == number) {
                         checkIfNumberExists = true;
                         break;
                     }
