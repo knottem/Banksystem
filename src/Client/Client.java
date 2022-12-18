@@ -39,8 +39,10 @@ public class Client {
                             found = true;
                             if (password.equals(database.getCustomers().get(i).getPassword())) {
                                 login(database.getCustomers().get(i));
-                                break;
+                            } else {
+                                System.out.println("Felaktigt lösenord.\n");
                             }
+                            break;
                         }
                     }
                     for (int i = 0; i < database.getAdmins().size(); i++) {
@@ -50,8 +52,10 @@ public class Client {
                             found = true;
                             if (password.equals(database.getAdmins().get(i).getPassword())) {
                                 //  loginAdmin(database.getAdmins().get(i));
-                                break;
+                            } else {
+                                System.out.println("Felaktigt lösenord.\n");
                             }
+                            break;
                         }
                     }
                     if (!found) {
