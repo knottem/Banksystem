@@ -97,7 +97,7 @@ public class Client {
             int answer = utility.inputInt("Välkommen " + admin.getName() +
                     "\n1. Uppdatera FAQ\n2. Logga ut");
             switch (answer) {
-                //case (1) -> faq.update(admin);
+                case (1) -> faq.writingFAQ();
                 case (2) -> startLoop = false;
                 default -> System.out.println("Felaktigt nummer");
             }
