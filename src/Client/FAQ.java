@@ -12,7 +12,7 @@ public class FAQ {
     Path faq = Paths.get("resources/FrequentlyAskedQuestions.txt");
     public void readingFAQ() {
 
-        String line = null;
+        String line;
 
             try (BufferedReader faqRead = Files.newBufferedReader(faq)) {
                 while ((line = faqRead.readLine()) != null)
@@ -23,7 +23,7 @@ public class FAQ {
             e.printStackTrace();
         }
     }
-    public void writingFAQ(Admin admin){
+    public void writingFAQ(){
 
 
             System.out.println("\nSkriv in en ny fråga:");
