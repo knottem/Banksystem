@@ -1,5 +1,8 @@
 package Database;
 
+import Accounts.Account;
+import Accounts.AccountFactory;
+import Accounts.AccountType;
 import Users.*;
 
 import java.io.*;

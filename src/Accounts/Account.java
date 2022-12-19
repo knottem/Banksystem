@@ -1,4 +1,4 @@
-package Users;
+package Accounts;
 
 public class Account {
     String nameType;

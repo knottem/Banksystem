@@ -1,6 +1,4 @@
-package Users;
-
-import java.util.ArrayList;
+package Accounts;
 
 public class AccountFactory {
     public static Account getAccount(AccountType accountType) {

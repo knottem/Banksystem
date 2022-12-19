@@ -1,20 +1,20 @@
-package Users;
+package Accounts;
 
-public class SavingsAccount extends Account{
-    String nameType = AccountType.SAVINGSACCOUNT.name();
-
+public class BasicAccount extends Account {
+    String nameType = AccountType.BASICACCOUNT.name();
 
     @Override
     public String getNameType() {
         return nameType;
     }
 
-    public SavingsAccount() {
+    public BasicAccount() {
     }
 
-    public SavingsAccount(int id, double balance) {
+    public BasicAccount(int id, double balance) {
         super(id, balance);
     }
+
 
     //Overrideade metoder ifall vi vill ha speciella funktioner för olika konton
     @Override
