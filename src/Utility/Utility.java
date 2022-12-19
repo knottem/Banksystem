@@ -60,19 +60,19 @@ public class Utility {
         boolean found = false;
         int value = inputInt("Hur mycket vill du överföra?");
         System.out.println("Från vilket konto?");
-        for (int i = 0; i <customer.getAccount().size() ; i++) {
-            System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
+        for (int i = 0; i <customer.getAccounts().size() ; i++) {
+            System.out.println(i+1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
         }
         int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
         int number = inputInt("Till vilket konto?");
-        if(customer.getAccount().get(konto).getBalance() - value >= 0) {
+        if(customer.getAccounts().get(konto).getBalance() - value >= 0) {
             for (int i = 0; i < database.getCustomers().size(); i++) {
-                for (int j = 0; j < database.getCustomers().get(i).getAccount().size(); j++) {
-                    if(database.getCustomers().get(i).getAccount().get(j).getId() == number){
-                        customer.getAccount().get(konto).withdrawMoney(value);
-                        database.getCustomers().get(i).getAccount().get(j).depositMoney(value);
+                for (int j = 0; j < database.getCustomers().get(i).getAccounts().size(); j++) {
+                    if(database.getCustomers().get(i).getAccounts().get(j).getId() == number){
+                        customer.getAccounts().get(konto).withdrawMoney(value);
+                        database.getCustomers().get(i).getAccounts().get(j).depositMoney(value);
                         System.out.println(value + " kr fördes över till konto " + number);
-                        history.writeToFile("Transfer " + value + " kr from Account " + customer.getAccount().get(konto).getId() + " to account " + number, customer);
+                        history.writeToFile("Transfer " + value + " kr from Account " + customer.getAccounts().get(konto).getId() + " to account " + number, customer);
                         found = true;
                         database.updateCustomerTextFile();
                         break;
@@ -90,21 +90,21 @@ public class Utility {
     public void deposit(Customer customer) {
         int value = inputInt("Hur mycket vill du lägga in?");
         System.out.println("Till vilket konto?");
-        for (int i = 0; i <customer.getAccount().size() ; i++) {
-            System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
+        for (int i = 0; i <customer.getAccounts().size() ; i++) {
+            System.out.println(i+1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
         }
         int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
-        customer.getAccount().get(konto).depositMoney(value);
-        System.out.println(value + " kr sattes in på kontot " + customer.getAccount().get(konto) + "\n");
-        history.writeToFile("Deposit " + value + " kr to Account " + customer.getAccount().get(konto).getId(), customer);
+        customer.getAccounts().get(konto).depositMoney(value);
+        System.out.println(value + " kr sattes in på kontot " + customer.getAccounts().get(konto) + "\n");
+        history.writeToFile("Deposit " + value + " kr to Account " + customer.getAccounts().get(konto).getId(), customer);
         sleep(2000);
         database.updateCustomerTextFile();
     }
 
     public void checkAccount(Customer customer) {
         StringBuilder accounts = new StringBuilder();
-        for (int i = 0; i < customer.getAccount().size() ; i++) {
-            accounts.append("Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr\n");
+        for (int i = 0; i < customer.getAccounts().size() ; i++) {
+            accounts.append("Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr\n");
         }
         if(accounts.isEmpty()){
             System.out.println("\n" + customer.getName() + "\n");
@@ -117,14 +117,14 @@ public class Utility {
     public void withdraw(Customer customer) {
         int value = inputInt("Hur mycket vill du ta ut?");
         System.out.println("Från vilket konto?");
-        for (int i = 0; i <customer.getAccount().size() ; i++) {
-            System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
+        for (int i = 0; i <customer.getAccounts().size() ; i++) {
+            System.out.println(i+1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
         }
         int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
-        if(customer.getAccount().get(konto).getBalance() - value >= 0) {
-            customer.getAccount().get(konto).withdrawMoney(value);
+        if(customer.getAccounts().get(konto).getBalance() - value >= 0) {
+            customer.getAccounts().get(konto).withdrawMoney(value);
             System.out.println(value + " kr togs ut från kontot\n");
-            history.writeToFile("Withdraw " + value + " kr from Account " + customer.getAccount().get(konto).getId(), customer);
+            history.writeToFile("Withdraw " + value + " kr from Account " + customer.getAccounts().get(konto).getId(), customer);
         } else {
             System.out.println("Du har för lite pengar på kontot");
         }
@@ -139,8 +139,8 @@ public class Utility {
             checkIfNumberExists = false;
             number = random.nextInt(999999) + 100000;
             for (int i = 0; i < database.getCustomers().size(); i++) {
-                for (int j = 0; j < database.getCustomers().get(i).getAccount().size(); j++) {
-                    if (database.getCustomers().get(i).getAccount().get(j).getId() == number) {
+                for (int j = 0; j < database.getCustomers().get(i).getAccounts().size(); j++) {
+                    if (database.getCustomers().get(i).getAccounts().get(j).getId() == number) {
                         checkIfNumberExists = true;
                         break;
                     }

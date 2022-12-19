@@ -35,14 +35,15 @@ public class Database {
                 String[] array = line.split("/");
                 String name = array[0];
                 String password = array[1];
-                ArrayList<Account> account = new ArrayList<>();
+                ArrayList<Account> accounts = new ArrayList<>();
                 for (int i = 2; i < array.length; i+=3) {
                     Account temp = AccountFactory.getAccount(AccountType.valueOf(array[i]));
                     temp.setId(Integer.parseInt(array[i+1]));
                     temp.setBalance(Double.parseDouble(array[i+2]));
-                    account.add(temp);
+                    accounts.add(temp);
                 }
-                customers.add((Customer) UserFactory.getUser(UserType.CUSTOMER,name, password, account));
+                customers.add((new Customer(name, password, accounts)));
+
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found");
@@ -63,9 +64,7 @@ public class Database {
                 String[] array = line.split("/");
                 String name = array[0];
                 String password = array[1];
-                //admin har 0 som accounts, ska försöka ändra detta
-                ArrayList<Account> account2 = new ArrayList<>();
-                admins.add((Admin) UserFactory.getUser(UserType.ADMIN,name, password, account2));
+                admins.add(new Admin(name, password));
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found");
@@ -82,11 +81,11 @@ public class Database {
                 out.print(element.getName() + "/");
                 out.print(element.getPassword() + "/");
 
-                for (int i = 0; i < element.getAccount().size(); i++) {
-                    ArrayList <Account> accountArrayList = element.getAccount();
+                for (int i = 0; i < element.getAccounts().size(); i++) {
+                    ArrayList <Account> accountArrayList = element.getAccounts();
                     Account temp = accountArrayList.get(i);
                     out.print(temp.getId()+ "/");
-                    if (i < element.getAccount().size()-1) {
+                    if (i < element.getAccounts().size()-1) {
                         out.print(temp.getBalance() + "/");
                     }else {
                         out.print(temp.getBalance() + "\n");

@@ -5,8 +5,8 @@ public class BasicAccount extends Account {
     public BasicAccount() {
     }
 
-    public BasicAccount(String name, int id, double balance) {
-        super(name, id, balance);
+    public BasicAccount(int id, double balance) {
+        super(id, balance);
     }
 
     //Overrideade metoder ifall vi vill ha speciella funktioner för olika konton
