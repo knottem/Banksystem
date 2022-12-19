@@ -5,8 +5,8 @@ public class SavingsAccount extends Account{
     public SavingsAccount() {
     }
 
-    public SavingsAccount(String name, int id, double balance) {
-        super(name, id, balance);
+    public SavingsAccount(int id, double balance) {
+        super(id, balance);
     }
 
     //Overrideade metoder ifall vi vill ha speciella funktioner för olika konton

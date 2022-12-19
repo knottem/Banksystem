@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Customer extends User{
 
     double balance;
-    ArrayList<Account> account;
+    ArrayList<Account> accounts;
 
     public Customer() {
     }
 
-    public Customer(String name, String password, ArrayList<Account> account) {
+    public Customer(String name, String password, ArrayList<Account> accounts) {
         super(name, password);
-        this.account = account;
+        this.accounts = accounts;
     }
 
     public double getBalance() {
@@ -30,12 +30,12 @@ public class Customer extends User{
         balance += amount;
     }
 
-    public ArrayList<Account> getAccount() {
-        return account;
+    public ArrayList<Account> getAccounts() {
+        return accounts;
     }
 
-    public void setAccount(ArrayList<Account> account) {
-        this.account = account;
+    public void setAccounts(ArrayList<Account> accounts) {
+        this.accounts = accounts;
     }
 
     public void transferToAccount (double amount, int fromAccount, int toAccount) {
