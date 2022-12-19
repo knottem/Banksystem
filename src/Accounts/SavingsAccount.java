@@ -1,11 +1,11 @@
-package Users;
+package Accounts;
 
-public class BasicAccount extends Account {
+public class SavingsAccount extends Account{
 
-    public BasicAccount() {
+    public SavingsAccount() {
     }
 
-    public BasicAccount(int id, double balance) {
+    public SavingsAccount(int id, double balance) {
         super(id, balance);
     }
 

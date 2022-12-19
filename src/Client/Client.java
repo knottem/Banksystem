@@ -1,5 +1,8 @@
 package Client;
 
+import Accounts.Account;
+import Accounts.AccountFactory;
+import Accounts.AccountType;
 import Database.Database;
 import Users.*;
 import Utility.Utility;
