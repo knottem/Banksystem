@@ -63,7 +63,7 @@ public class Database {
                 String[] array = line.split("/");
                 String name = array[0];
                 String password = array[1];
-                double balance = Double.parseDouble(array[2]); //admin har 0 som balance, ska försöka ändra detta
+                //admin har 0 som accounts, ska försöka ändra detta
                 ArrayList<Account> account2 = new ArrayList<>();
                 admins.add((Admin) UserFactory.getUser(UserType.ADMIN,name, password, account2));
             }

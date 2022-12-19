@@ -1,6 +1,7 @@
 package Client;
 
 import Database.Database;
+import Users.Admin;
 import Users.Customer;
 import Utility.Utility;
 
@@ -51,7 +52,7 @@ public class Client {
                             String password = scan.nextLine();
                             found = true;
                             if (password.equals(database.getAdmins().get(i).getPassword())) {
-                                //  loginAdmin(database.getAdmins().get(i));
+                                loginAdmin(database.getAdmins().get(i));
                             } else {
                                 System.out.println("Felaktigt lösenord.\n");
                             }
@@ -88,6 +89,19 @@ public class Client {
                     default -> System.out.println("Felaktigt nummer");
                 }
             }while(startLoop);
+    }
+
+    private void loginAdmin (Admin admin){
+        boolean startLoop = true;
+        do {
+            int answer = utility.inputInt("Välkommen " + admin.getName() +
+                    "\n1. Uppdatera FAQ\n2. Logga ut");
+            switch (answer) {
+                //case (1) -> faq.update(admin);
+                case (2) -> startLoop = false;
+                default -> System.out.println("Felaktigt nummer");
+            }
+        }while(startLoop);
     }
 
     public static void main(String[] args) {
