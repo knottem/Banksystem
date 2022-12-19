@@ -56,35 +56,35 @@ public class Utility {
         }
     }
 
-//    public void transfer(Customer customer, ArrayList<Customer> customers){
-//        boolean found = false;
-//        Scanner scan = new Scanner(System.in);
-//        int value = inputInt("Hur mycket vill du överföra?");
-//        if(customer.getBalance() - value >= 0) {
-//            int account = inputInt("Till vilket konto?");
-//            for (int i = 0; i < customers.size(); i++) {
-//                if (customers.get(i).getAccount() == account) {
-//                    found = true;
-//                    while (true) {
-//                        System.out.println("Stämmer detta konto: " + account + " Svara med J för ja eller N för nej");
-//                        String answer = scan.nextLine();
-//                        if (answer.equalsIgnoreCase("j")) {
-//                            //Måste lägga till att kolla så det inte blir minus tal efter man withdrawar
-//                            customer.withdrawMoney(value);
-//                            customers.get(i).depositMoney(value);
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//            if(!found){
-//                System.out.println("felaktigt konto");
-//            }
-//        } else {
-//            System.out.println("Du har för lite pengar på kontot");
-//        }
-//
-//    }
+    public void transfer(Customer customer){
+        boolean found = false;
+        int value = inputInt("Hur mycket vill du överföra?");
+        System.out.println("Från vilket konto?");
+        for (int i = 0; i <customer.getAccount().size() ; i++) {
+            System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
+        }
+        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
+        int number = inputInt("Till vilket konto?");
+        if(customer.getAccount().get(konto).getBalance() - value >= 0) {
+            for (int i = 0; i < database.getCustomers().size(); i++) {
+                for (int j = 0; j < database.getCustomers().get(i).getAccount().size(); j++) {
+                    if(database.getCustomers().get(i).getAccount().get(j).getId() == number){
+                        customer.getAccount().get(konto).withdrawMoney(value);
+                        database.getCustomers().get(i).getAccount().get(j).depositMoney(value);
+                        System.out.println(value + " kr fördes över till konto " + number);
+                        history.writeToFile("Transfer " + value + " kr from Account " + customer.getAccount().get(konto).getId() + " to account " + number, customer);
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if(!found){
+                System.out.println("Kontot finns ej.");
+            }
+        } else {
+            System.out.println("Du har för lite pengar på kontot");
+        }
+    }
 
     public void deposit(Customer customer) {
         int value = inputInt("Hur mycket vill du lägga in?");
@@ -92,7 +92,7 @@ public class Utility {
         for (int i = 0; i <customer.getAccount().size() ; i++) {
             System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
         }
-        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") + 1;
+        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
         customer.getAccount().get(konto).depositMoney(value);
         System.out.println(value + " kr sattes in på kontot " + customer.getAccount().get(konto) + "\n");
         history.writeToFile("Deposit " + value + " kr to Account " + customer.getAccount().get(konto).getId(), customer);
@@ -118,7 +118,7 @@ public class Utility {
         for (int i = 0; i <customer.getAccount().size() ; i++) {
             System.out.println(i+1 + ". Konto: " + customer.getAccount().get(i).getId() + " Balance: " + customer.getAccount().get(i).getBalance() + " kr");
         }
-        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") + 1;
+        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
         if(customer.getAccount().get(konto).getBalance() - value >= 0) {
             customer.getAccount().get(konto).withdrawMoney(value);
             System.out.println(value + " kr togs ut från kontot\n");
