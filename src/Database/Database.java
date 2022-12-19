@@ -36,10 +36,10 @@ public class Database {
                 String name = array[0];
                 String password = array[1];
                 ArrayList<Account> account = new ArrayList<>();
-                for (int i = 2; i < array.length; i+=2) {
-                    Account temp = new Account();
-                    temp.setId(Integer.parseInt(array[i]));
-                    temp.setBalance(Double.parseDouble(array[i+1]));
+                for (int i = 2; i < array.length; i+=3) {
+                    Account temp = AccountFactory.getAccount(AccountType.valueOf(array[i]));
+                    temp.setId(Integer.parseInt(array[i+1]));
+                    temp.setBalance(Double.parseDouble(array[i+2]));
                     account.add(temp);
                 }
                 customers.add((Customer) UserFactory.getUser(UserType.CUSTOMER,name, password, account));
