@@ -104,9 +104,6 @@ public class Database {
         }
     }
 
-    public static void main(String[] args) {
-        Database.getDatabase().updateCustomerTextFile();
-    }
     public ArrayList<Customer> getCustomers() {
         return customers;
     }
