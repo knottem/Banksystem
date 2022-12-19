@@ -3,6 +3,7 @@ package Client;
 import Database.Database;
 import Users.Admin;
 import Users.Customer;
+import Users.User;
 import Utility.Utility;
 
 import java.time.LocalDate;
@@ -97,7 +98,7 @@ public class Client {
             int answer = utility.inputInt("Välkommen " + admin.getName() +
                     "\n1. Uppdatera FAQ\n2. Logga ut");
             switch (answer) {
-                //case (1) -> faq.update(admin);
+                case (1) -> faq.writingFAQ(admin);
                 case (2) -> startLoop = false;
                 default -> System.out.println("Felaktigt nummer");
             }
