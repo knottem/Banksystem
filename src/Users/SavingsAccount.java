@@ -1,6 +1,13 @@
 package Users;
 
 public class SavingsAccount extends Account{
+    String nameType = AccountType.SAVINGSACCOUNT.name();
+
+
+    @Override
+    public String getNameType() {
+        return nameType;
+    }
 
     public SavingsAccount() {
     }

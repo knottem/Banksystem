@@ -1,6 +1,11 @@
 package Users;
 
 public class Account {
+    String nameType;
+
+    public String getNameType() {
+        return nameType;
+    }
 
     private int id;
     private double balance;

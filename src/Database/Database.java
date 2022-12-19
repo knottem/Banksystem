@@ -84,6 +84,7 @@ public class Database {
                 for (int i = 0; i < element.getAccounts().size(); i++) {
                     ArrayList <Account> accountArrayList = element.getAccounts();
                     Account temp = accountArrayList.get(i);
+                    out.print(temp.getNameType() + "/");
                     out.print(temp.getId()+ "/");
                     if (i < element.getAccounts().size()-1) {
                         out.print(temp.getBalance() + "/");
@@ -104,6 +105,9 @@ public class Database {
         }
     }
 
+    public static void main(String[] args) {
+        Database.getDatabase().updateCustomerTextFile();
+    }
     public ArrayList<Customer> getCustomers() {
         return customers;
     }
