@@ -1,6 +1,6 @@
 package Users;
 
-public class Account {
+public abstract class Account {
 
     private int id;
     private double balance;
