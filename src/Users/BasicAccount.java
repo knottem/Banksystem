@@ -1,6 +1,12 @@
 package Users;
 
 public class BasicAccount extends Account {
+    String nameType = AccountType.BASICACCOUNT.name();
+
+    @Override
+    public String getNameType() {
+        return nameType;
+    }
 
     public BasicAccount() {
     }
@@ -8,6 +14,7 @@ public class BasicAccount extends Account {
     public BasicAccount(int id, double balance) {
         super(id, balance);
     }
+
 
     //Overrideade metoder ifall vi vill ha speciella funktioner för olika konton
     @Override
