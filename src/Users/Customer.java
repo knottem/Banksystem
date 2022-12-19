@@ -9,13 +9,17 @@ public class Customer extends User{
     double balance;
     ArrayList<Account> accounts;
 
-    public Customer() {
+    public Customer(String name, String password, String idNumber, ArrayList<Account> accounts) {
+        super(name, password, idNumber);
+        this.accounts = accounts;
+
     }
 
     public Customer(String name, String password, ArrayList<Account> accounts) {
         super(name, password);
         this.accounts = accounts;
     }
+
 
     public double getBalance() {
         return balance;

@@ -4,6 +4,7 @@ public class User {
 
     private String name;
     private String password;
+    private String idNumber;
 
     public User() {
     }
@@ -12,9 +13,16 @@ public class User {
         this.name = name;
         this.password = password;
     }
-
+    public User(String name, String password, String idNumber) {
+        this.name = name;
+        this.password = password;
+        this.idNumber = idNumber;
+    }
     public String getName() {
         return name;
+    }
+    public String getNumber(){
+        return idNumber;
     }
 
     public void setName(String name) {

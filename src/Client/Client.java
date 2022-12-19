@@ -32,12 +32,12 @@ public class Client {
                     4. Avsluta Programmet""");
             switch (answer) {
                 case (1) -> {
-                    System.out.println("\nSkriv in användarnamn:");
+                    System.out.println("\nSkriv in personnummer:");
                     Scanner scan = new Scanner(System.in);
                     String name = scan.nextLine();
                     boolean found = false;
                     for (int i = 0; i < database.getCustomers().size(); i++) {
-                        if (name.equalsIgnoreCase(database.getCustomers().get(i).getName())) {
+                        if (name.equalsIgnoreCase(database.getCustomers().get(i).getNumber())) {
                             System.out.println("Skriv in lösenord:");
                             String password = scan.nextLine();
                             found = true;

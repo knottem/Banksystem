@@ -37,14 +37,15 @@ public class Database {
                 String[] array = line.split("/");
                 String name = array[0];
                 String password = array[1];
+                String idNumber = array[2];
                 ArrayList<Account> accounts = new ArrayList<>();
-                for (int i = 2; i < array.length; i+=3) {
+                for (int i = 3; i < array.length; i+=3) {
                     Account temp = AccountFactory.getAccount(AccountType.valueOf(array[i]));
                     temp.setId(Integer.parseInt(array[i+1]));
                     temp.setBalance(Double.parseDouble(array[i+2]));
                     accounts.add(temp);
                 }
-                customers.add((new Customer(name, password, accounts)));
+                customers.add((new Customer(name, password, idNumber, accounts)));
 
             }
         } catch (FileNotFoundException e) {
