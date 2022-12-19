@@ -1,8 +1,12 @@
 package Utility;
 
+import Accounts.Account;
+import Accounts.AccountFactory;
+import Accounts.AccountType;
 import Database.Database;
 import Users.Customer;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -72,7 +76,7 @@ public class Utility {
                         customer.getAccounts().get(konto).withdrawMoney(value);
                         database.getCustomers().get(i).getAccounts().get(j).depositMoney(value);
                         System.out.println(value + " kr fördes över till konto " + number);
-                        history.writeToFile("Transfer " + value + " kr from Account " + customer.getAccounts().get(konto).getId() + " to account " + number, customer);
+                        history.writeToFile("Transfer " + value + " kr from Account " + customer.getAccounts().get(konto).getId() + " to Account " + number, customer);
                         found = true;
                         database.updateCustomerTextFile();
                         break;
@@ -95,7 +99,7 @@ public class Utility {
         }
         int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
         customer.getAccounts().get(konto).depositMoney(value);
-        System.out.println(value + " kr sattes in på kontot " + customer.getAccounts().get(konto) + "\n");
+        System.out.println(value + " kr sattes in på kontot " + customer.getAccounts().get(konto).getId() + "\n");
         history.writeToFile("Deposit " + value + " kr to Account " + customer.getAccounts().get(konto).getId(), customer);
         sleep(2000);
         database.updateCustomerTextFile();
@@ -148,5 +152,22 @@ public class Utility {
             }
         } while (checkIfNumberExists);
         return number;
+    }
+
+    public void createNewAccount(Customer customer) {
+        System.out.println("Vilkets sorts konto vill du skapa?");
+        for (int i = 0; i < AccountType.values().length; i++) {
+            System.out.println(i+1 + ". " + AccountType.values()[i]);
+        }
+        int number = inputInt("svara med rätt siffra") - 1;
+        if(number <= AccountType.values().length) {
+            customer.getAccounts().add(AccountFactory.getAccount(AccountType.values()[number]));
+            int id = createRandomNumber();
+            customer.getAccounts().get(customer.getAccounts().size()-1).setId(id);
+            history.writeToFile("Created new " + AccountType.values()[number] + " with number: " + id , customer);
+            database.updateCustomerTextFile();
+        } else {
+            System.out.println("felaktigt siffra");
+        }
     }
 }
