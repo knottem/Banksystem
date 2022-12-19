@@ -1,9 +1,7 @@
 package Client;
 
 import Database.Database;
-import Users.Account;
-import Users.Admin;
-import Users.Customer;
+import Users.*;
 import Utility.Utility;
 
 import java.time.LocalDate;
@@ -115,7 +113,10 @@ public class Client {
         System.out.println("Skriv in ditt lösenord");
         String password = scan.nextLine();
         ArrayList<Account> temp = new ArrayList<>();
-        temp.add(new Account(utility.createRandomNumber(), 0));
+        Account temp2 = AccountFactory.getAccount(AccountType.BASICACCOUNT);
+        temp2.setId(utility.createRandomNumber());
+        temp2.setBalance(0);
+        temp.add(temp2);
         database.getCustomers().add(new Customer(name, password, temp));
         database.updateCustomerTextFile();
     }
