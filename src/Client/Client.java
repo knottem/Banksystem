@@ -1,11 +1,13 @@
 package Client;
 
 import Database.Database;
+import Users.Account;
 import Users.Admin;
 import Users.Customer;
 import Utility.Utility;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
@@ -64,6 +66,8 @@ public class Client {
                     }
                 }
                 case (2) -> {
+                    addCustomer();
+                    utility.sleep(1000);
                 }
                 case (3) -> {
                     faq.readingFAQ();
@@ -81,7 +85,7 @@ public class Client {
             int answer = utility.inputInt("Välkommen " + customer.getName() +
                     "\n1. Överföra pengar\n2. Sätta in pengar\n3. Ta ut pengar\n4. Kolla dina konton\n5. Logga ut");
                 switch (answer) {
-                    //case (1) -> utility.transfer(customer, database.getCustomers());
+                    case (1) -> utility.transfer(customer);
                     case (2) -> utility.deposit(customer);
                     case (3) -> utility.withdraw(customer);
                     case (4) -> utility.checkAccount(customer);
@@ -97,11 +101,23 @@ public class Client {
             int answer = utility.inputInt("Välkommen " + admin.getName() +
                     "\n1. Uppdatera FAQ\n2. Logga ut");
             switch (answer) {
-                //case (1) -> faq.update(admin);
+                case (1) -> faq.writingFAQ();
                 case (2) -> startLoop = false;
                 default -> System.out.println("Felaktigt nummer");
             }
         }while(startLoop);
+    }
+
+    private void addCustomer(){
+        System.out.println("Skriv in ditt namn");
+        Scanner scan = new Scanner(System.in);
+        String name = scan.nextLine();
+        System.out.println("Skriv in ditt lösenord");
+        String password = scan.nextLine();
+        ArrayList<Account> temp = new ArrayList<>();
+        temp.add(new Account(utility.createRandomNumber(), 0));
+        database.getCustomers().add(new Customer(name, password, temp));
+        database.updateCustomerTextFile();
     }
 
     public static void main(String[] args) {

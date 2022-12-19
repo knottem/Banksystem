@@ -76,6 +76,34 @@ public class Database {
         }
 
     }
+    public void updateCustomerTextFile(){
+        try(PrintWriter out = new PrintWriter(("resources/customers.txt"))) {
+            for (Customer element : customers){
+                out.print(element.getName() + "/");
+                out.print(element.getPassword() + "/");
+
+                for (int i = 0; i < element.getAccount().size(); i++) {
+                    ArrayList <Account> accountArrayList = element.getAccount();
+                    Account temp = accountArrayList.get(i);
+                    out.print(temp.getId()+ "/");
+                    if (i < element.getAccount().size()-1) {
+                        out.print(temp.getBalance() + "/");
+                    }else {
+                        out.print(temp.getBalance() + "\n");
+                    }
+
+                }
+
+            }
+            out.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found");
+            e.printStackTrace();
+        } catch (Exception e){
+            System.out.println("error");
+            e.printStackTrace();
+        }
+    }
 
     public ArrayList<Customer> getCustomers() {
         return customers;
