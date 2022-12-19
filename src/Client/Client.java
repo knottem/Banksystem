@@ -1,11 +1,13 @@
 package Client;
 
 import Database.Database;
+import Users.Account;
 import Users.Admin;
 import Users.Customer;
 import Utility.Utility;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Client {
@@ -64,6 +66,8 @@ public class Client {
                     }
                 }
                 case (2) -> {
+                    addCustomer();
+                    utility.sleep(1000);
                 }
                 case (3) -> {
                     faq.readingFAQ();
@@ -102,6 +106,18 @@ public class Client {
                 default -> System.out.println("Felaktigt nummer");
             }
         }while(startLoop);
+    }
+
+    private void addCustomer(){
+        System.out.println("Skriv in ditt namn");
+        Scanner scan = new Scanner(System.in);
+        String name = scan.nextLine();
+        System.out.println("Skriv in ditt lösenord");
+        String password = scan.nextLine();
+        ArrayList<Account> temp = new ArrayList<>();
+        temp.add(new Account(utility.createRandomNumber(), 0));
+        database.getCustomers().add(new Customer(name, password, temp));
+        database.updateCustomerTextFile();
     }
 
     public static void main(String[] args) {
