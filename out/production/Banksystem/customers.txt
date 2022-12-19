@@ -1,4 +1,4 @@
 Frida Lindberg/123/3000/5000.0/1233/5000.0
-Samuel Peterson/222/777/8000.0/8080/900.0
+Samuel Peterson/222/777/7800.0/8080/1100.0
 Erik Wallenius/321/424756/5000.0/1234/5000.0
 Sixten Lönnberg/111/400/5000.0
