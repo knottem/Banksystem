@@ -74,6 +74,7 @@ public class Utility {
                         System.out.println(value + " kr fördes över till konto " + number);
                         history.writeToFile("Transfer " + value + " kr from Account " + customer.getAccount().get(konto).getId() + " to account " + number, customer);
                         found = true;
+                        Database.getDatabase().updateCustomerTextFile();
                         break;
                     }
                 }
@@ -97,6 +98,7 @@ public class Utility {
         System.out.println(value + " kr sattes in på kontot " + customer.getAccount().get(konto) + "\n");
         history.writeToFile("Deposit " + value + " kr to Account " + customer.getAccount().get(konto).getId(), customer);
         sleep(2000);
+        Database.getDatabase().updateCustomerTextFile();
     }
 
     public void checkAccount(Customer customer) {
@@ -126,6 +128,7 @@ public class Utility {
         } else {
             System.out.println("Du har för lite pengar på kontot");
         }
+        Database.getDatabase().updateCustomerTextFile();
         sleep(2000);
     }
 
