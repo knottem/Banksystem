@@ -50,7 +50,7 @@ public class Client {
                         }
                     }
                     for (int i = 0; i < database.getAdmins().size(); i++) {
-                        if (name.equalsIgnoreCase(database.getAdmins().get(i).getName())) {
+                        if (name.equalsIgnoreCase(database.getAdmins().get(i).getNumber())) {
                             System.out.println("Skriv in lösenord:");
                             String password = scan.nextLine();
                             found = true;
@@ -115,12 +115,14 @@ public class Client {
         String name = scan.nextLine();
         System.out.println("Skriv in ditt lösenord");
         String password = scan.nextLine();
+        System.out.println("Skriv in ditt personnummer");
+        String idNumber = scan.nextLine();
         ArrayList<Account> temp = new ArrayList<>();
         Account temp2 = AccountFactory.getAccount(AccountType.BASICACCOUNT);
         temp2.setId(utility.createRandomNumber());
         temp2.setBalance(0);
         temp.add(temp2);
-        database.getCustomers().add(new Customer(name, password, temp));
+        database.getCustomers().add(new Customer(name, password, idNumber, temp));
         database.updateCustomerTextFile();
     }
 

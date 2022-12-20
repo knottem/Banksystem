@@ -15,10 +15,6 @@ public class Customer extends User{
 
     }
 
-    public Customer(String name, String password, ArrayList<Account> accounts) {
-        super(name, password);
-        this.accounts = accounts;
-    }
 
 
     public double getBalance() {

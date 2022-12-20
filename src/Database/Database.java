@@ -67,7 +67,8 @@ public class Database {
                 String[] array = line.split("/");
                 String name = array[0];
                 String password = array[1];
-                admins.add(new Admin(name, password));
+                String idNumber = array[2];
+                admins.add(new Admin(name, password, idNumber));
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found");
