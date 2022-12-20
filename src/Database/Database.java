@@ -37,14 +37,15 @@ public class Database {
                 String[] array = line.split("/");
                 String name = array[0];
                 String password = array[1];
+                String idNumber = array[2];
                 ArrayList<Account> accounts = new ArrayList<>();
-                for (int i = 2; i < array.length; i+=3) {
+                for (int i = 3; i < array.length; i+=3) {
                     Account temp = AccountFactory.getAccount(AccountType.valueOf(array[i]));
                     temp.setId(Integer.parseInt(array[i+1]));
                     temp.setBalance(Double.parseDouble(array[i+2]));
                     accounts.add(temp);
                 }
-                customers.add((new Customer(name, password, accounts)));
+                customers.add((new Customer(name, password, idNumber, accounts)));
 
             }
         } catch (FileNotFoundException e) {
@@ -66,7 +67,8 @@ public class Database {
                 String[] array = line.split("/");
                 String name = array[0];
                 String password = array[1];
-                admins.add(new Admin(name, password));
+                String idNumber = array[2];
+                admins.add(new Admin(name, password, idNumber));
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found");
@@ -82,6 +84,7 @@ public class Database {
             for (Customer element : customers){
                 out.print(element.getName() + "/");
                 out.print(element.getPassword() + "/");
+                out.print(element.getNumber() + "/");
 
                 for (int i = 0; i < element.getAccounts().size(); i++) {
                     ArrayList <Account> accountArrayList = element.getAccounts();
