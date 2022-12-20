@@ -1,12 +1,10 @@
 package Utility;
 
-import Accounts.Account;
 import Accounts.AccountFactory;
 import Accounts.AccountType;
 import Database.Database;
 import Users.Customer;
 
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
