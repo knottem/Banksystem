@@ -25,8 +25,6 @@ public class FAQ {
     }
     public void writingFAQ(){
             Scanner scanFAQ = new Scanner(System.in);
-
-
             System.out.println("\nSkriv in en ny fråga:");
             String newQuestion = scanFAQ.nextLine();
             System.out.println("\nSkriv in ett nytt svar:");
