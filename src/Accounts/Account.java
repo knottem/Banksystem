@@ -1,6 +1,6 @@
 package Accounts;
 
-public class Account {
+public abstract class Account {
     String nameType;
 
     public String getNameType() {
