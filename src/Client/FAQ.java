@@ -24,14 +24,13 @@ public class FAQ {
         }
     }
     public void writingFAQ(){
+            Scanner scanFAQ = new Scanner(System.in);
 
 
             System.out.println("\nSkriv in en ny fråga:");
-            Scanner scanQ = new Scanner(System.in);
-            String newQuestion = scanQ.nextLine();
+            String newQuestion = scanFAQ.nextLine();
             System.out.println("\nSkriv in ett nytt svar:");
-            Scanner scanA = new Scanner(System.in);
-            String newAnswer = scanA.nextLine();
+            String newAnswer = scanFAQ.nextLine();
 
             try(PrintWriter writing = new PrintWriter(new BufferedWriter(new FileWriter("resources/FrequentlyAskedQuestions.txt", true)));){
                 writing.append(System.lineSeparator() + newQuestion + " " + newAnswer);
