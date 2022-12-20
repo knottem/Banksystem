@@ -84,6 +84,7 @@ public class Database {
             for (Customer element : customers){
                 out.print(element.getName() + "/");
                 out.print(element.getPassword() + "/");
+                out.print(element.getNumber() + "/");
 
                 for (int i = 0; i < element.getAccounts().size(); i++) {
                     ArrayList <Account> accountArrayList = element.getAccounts();
