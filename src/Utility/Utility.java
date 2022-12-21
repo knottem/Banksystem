@@ -103,12 +103,12 @@ public class Utility {
     public void checkAccount(Customer customer) {
         StringBuilder accounts = new StringBuilder();
         for (int i = 0; i < customer.getAccounts().size() ; i++) {
-            accounts.append("Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr\n");
+            accounts.append("Konto: " + customer.getAccounts().get(i).getNameType() + "\nKontonummer: " + customer.getAccounts().get(i).getId() + "\nSaldo: " + customer.getAccounts().get(i).getBalance() + " kr\n\n");
         }
         if(accounts.isEmpty()){
             System.out.println("\n" + customer.getName() + "\n");
         } else {
-            System.out.println("\n" + customer.getName() + "\n" + accounts);
+            System.out.println("\n" + customer.getName() + "\n\n" + accounts);
         }
         sleep(2000);
     }
