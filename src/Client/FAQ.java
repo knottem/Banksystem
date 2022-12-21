@@ -17,11 +17,10 @@ public class FAQ {
             try (BufferedReader faqRead = Files.newBufferedReader(faq)) {
                 while ((line = faqRead.readLine()) != null)
                     System.out.println(line);
-
-        }
-        catch (IOException e){
+        }  catch (IOException e){
             e.printStackTrace();
         }
+        System.out.println("\n");
     }
     public void writingFAQ(){
             Scanner scanFAQ = new Scanner(System.in);
@@ -31,7 +30,7 @@ public class FAQ {
             String newAnswer = scanFAQ.nextLine();
 
             try(PrintWriter writing = new PrintWriter(new BufferedWriter(new FileWriter("resources/FrequentlyAskedQuestions.txt", true)));){
-                writing.append(System.lineSeparator() + newQuestion + " " + newAnswer);
+                writing.append(System.lineSeparator() + newQuestion + "\n" + newAnswer + "\n");
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
