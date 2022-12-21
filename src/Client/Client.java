@@ -23,6 +23,7 @@ public class Client {
 
         System.out.println("\nVälkommen till Bank Systemet");
         System.out.println("Dagens Datum: " + today + "\n");
+        System.out.println("Kontaktinformation:\nEmail: bank@bank.com\nAdress: Bankgatan 1, Bankstaden.\n");
         while (true) {
             int answer = utility.inputInt("""
                     Vad vill du göra?

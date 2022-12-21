@@ -31,25 +31,6 @@ public class Utility {
         }
     }
 
-    public boolean repeatProgram(String text) {
-        boolean repeat;
-        do {
-            System.out.println(text +" j/n");
-            Scanner input = new Scanner(System.in);
-            String yesNo = input.nextLine();
-            repeat = true;
-            switch (yesNo) {
-                case "j" -> repeat = false;
-                case "n" -> {
-                    System.out.println("Hej då");
-                    System.exit(0);
-                    }
-                default -> System.out.println("Svara med j för JA och n för NEJ");
-            }
-        } while (repeat);
-        return false;
-    }
-
     public void sleep(int number){
         try{
             Thread.sleep(number);
@@ -61,76 +42,100 @@ public class Utility {
     public void transfer(Customer customer){
         boolean found = false;
         int value = inputInt("Hur mycket vill du överföra?");
-        System.out.println("Från vilket konto?");
-        for (int i = 0; i <customer.getAccounts().size() ; i++) {
-            System.out.println(i+1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
-        }
-        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
-        int number = inputInt("Till vilket konto?");
-        if(customer.getAccounts().get(konto).getBalance() - value >= 0) {
-            for (int i = 0; i < database.getCustomers().size(); i++) {
-                for (int j = 0; j < database.getCustomers().get(i).getAccounts().size(); j++) {
-                    if(database.getCustomers().get(i).getAccounts().get(j).getId() == number){
-                        customer.getAccounts().get(konto).withdrawMoney(value);
-                        database.getCustomers().get(i).getAccounts().get(j).depositMoney(value);
-                        System.out.println(value + " kr fördes över till konto " + number);
-                        history.writeToFile("Transfer " + value + " kr from Account " + customer.getAccounts().get(konto).getId() + " to Account " + number, customer);
-                        found = true;
-                        database.updateCustomerTextFile();
-                        break;
-                    }
-                }
+        if(value > 0) {
+            System.out.println("Från vilket konto?");
+            for (int i = 0; i < customer.getAccounts().size(); i++) {
+                System.out.println(i + 1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
             }
-            if(!found){
-                System.out.println("Kontot finns ej.");
+            int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
+            if(konto < customer.getAccounts().size()) {
+                int number = inputInt("Till vilket konto nummer? (sexsiffrigt nummer)");
+                if (customer.getAccounts().get(konto).getBalance() - value >= 0) {
+                    for (int i = 0; i < database.getCustomers().size(); i++) {
+                        for (int j = 0; j < database.getCustomers().get(i).getAccounts().size(); j++) {
+                            if (database.getCustomers().get(i).getAccounts().get(j).getId() == number) {
+                                customer.getAccounts().get(konto).withdrawMoney(value);
+                                database.getCustomers().get(i).getAccounts().get(j).depositMoney(value);
+                                System.out.println(value + " kr fördes över till konto " + number);
+                                history.writeToFile("Transfer " + value + " kr from Account " + customer.getAccounts().get(konto).getId() + " to Account " + number, customer);
+                                found = true;
+                                database.updateCustomerTextFile();
+                                break;
+                            }
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("Kontot finns ej.");
+                    }
+                } else {
+                    System.out.println("Du har för lite pengar på kontot");
+                }
+            } else {
+                System.out.println("Felaktigt konto");
             }
         } else {
-            System.out.println("Du har för lite pengar på kontot");
+            System.out.println("Du kan ej överföra mindre än 0 kr.");
         }
     }
 
     public void deposit(Customer customer) {
         int value = inputInt("Hur mycket vill du lägga in?");
-        System.out.println("Till vilket konto?");
-        for (int i = 0; i <customer.getAccounts().size() ; i++) {
-            System.out.println(i+1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
+        if(value > 0) {
+            System.out.println("Till vilket konto?");
+            for (int i = 0; i < customer.getAccounts().size(); i++) {
+                System.out.println(i + 1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
+            }
+            int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
+            if(konto < customer.getAccounts().size()) {
+                customer.getAccounts().get(konto).depositMoney(value);
+                System.out.println(value + " kr sattes in på kontot " + customer.getAccounts().get(konto).getId() + "\n");
+                history.writeToFile("Deposit " + value + " kr to Account " + customer.getAccounts().get(konto).getId(), customer);
+                sleep(2000);
+                database.updateCustomerTextFile();
+            } else {
+                System.out.println("Felaktigt konto");
+            }
+        } else {
+            System.out.println("Du kan ej sätta in mindre än 0 kr");
         }
-        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
-        customer.getAccounts().get(konto).depositMoney(value);
-        System.out.println(value + " kr sattes in på kontot " + customer.getAccounts().get(konto).getId() + "\n");
-        history.writeToFile("Deposit " + value + " kr to Account " + customer.getAccounts().get(konto).getId(), customer);
-        sleep(2000);
-        database.updateCustomerTextFile();
     }
 
     public void checkAccount(Customer customer) {
         StringBuilder accounts = new StringBuilder();
         for (int i = 0; i < customer.getAccounts().size() ; i++) {
-            accounts.append("Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr\n");
+            accounts.append("Konto: " + customer.getAccounts().get(i).getNameType() + "\nKontonummer: " + customer.getAccounts().get(i).getId() + "\nSaldo: " + customer.getAccounts().get(i).getBalance() + " kr\n\n");
         }
         if(accounts.isEmpty()){
             System.out.println("\n" + customer.getName() + "\n");
         } else {
-            System.out.println("\n" + customer.getName() + "\n" + accounts);
+            System.out.println("\n" + customer.getName() + "\n\n" + accounts);
         }
         sleep(2000);
     }
 
     public void withdraw(Customer customer) {
         int value = inputInt("Hur mycket vill du ta ut?");
-        System.out.println("Från vilket konto?");
-        for (int i = 0; i <customer.getAccounts().size() ; i++) {
-            System.out.println(i+1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
-        }
-        int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
-        if(customer.getAccounts().get(konto).getBalance() - value >= 0) {
-            customer.getAccounts().get(konto).withdrawMoney(value);
-            System.out.println(value + " kr togs ut från kontot\n");
-            history.writeToFile("Withdraw " + value + " kr from Account " + customer.getAccounts().get(konto).getId(), customer);
+        if(value > 0) {
+            System.out.println("Från vilket konto?");
+            for (int i = 0; i < customer.getAccounts().size(); i++) {
+                System.out.println(i + 1 + ". Konto: " + customer.getAccounts().get(i).getId() + " Balance: " + customer.getAccounts().get(i).getBalance() + " kr");
+            }
+            int konto = inputInt("Svara med siffran som stämmer överens med Kontot") - 1;
+            if(konto < customer.getAccounts().size()) {
+                if (customer.getAccounts().get(konto).getBalance() - value >= 0) {
+                    customer.getAccounts().get(konto).withdrawMoney(value);
+                    System.out.println(value + " kr togs ut från kontot " + customer.getAccounts().get(konto).getId() + "\n");
+                    history.writeToFile("Withdraw " + value + " kr from Account " + customer.getAccounts().get(konto).getId(), customer);
+                } else {
+                    System.out.println("Du har för lite pengar på kontot");
+                }
+                database.updateCustomerTextFile();
+            } else {
+                System.out.println("Felaktigt konto");
+            }
         } else {
-            System.out.println("Du har för lite pengar på kontot");
+            System.out.println("Du kan ej ta ut mindre än 0 kr");
         }
-        database.updateCustomerTextFile();
         sleep(2000);
     }
 

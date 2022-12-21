@@ -23,3 +23,17 @@ Activity: Transfer 200 kr from Account 777 to account 8080.
 Time: 09:59:22.
 Date: 2022-12-19
 
+User: Hanna Ahl.
+Activity: Deposit 4000 kr to Account 629418.
+Time: 10:33:07.
+Date: 2022-12-20
+
+User: Frida Lindberg.
+Activity: Transfer 200 kr from Account 304562 to Account 123372.
+Time: 11:22:46.
+Date: 2022-12-21
+
+User: Erik Wallenius.
+Activity: Deposit 1000 kr to Account 424756.
+Time: 11:56:06.
+Date: 2022-12-21
