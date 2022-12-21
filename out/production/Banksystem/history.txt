@@ -33,13 +33,7 @@ Activity: Transfer 200 kr from Account 304562 to Account 123372.
 Time: 11:22:46.
 Date: 2022-12-21
 
-User: Frida Lindberg.
-Activity: Transfer -200 kr from Account 304562 to Account 123372.
-Time: 11:26:39.
+User: Erik Wallenius.
+Activity: Deposit 1000 kr to Account 424756.
+Time: 11:56:06.
 Date: 2022-12-21
-
-User: Frida Lindberg.
-Activity: Transfer -200 kr from Account 304562 to Account 123372.
-Time: 11:27:43.
-Date: 2022-12-21
-
